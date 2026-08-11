@@ -19,16 +19,17 @@ jobs:
 
       - name: Setup Theos
         run: |
-          sudo git clone --recursive https://github.com/theos/theos.git /var/theos
-          echo "THEOS=/var/theos" >> $GITHUB_ENV
+          git clone --recursive https://github.com/theos/theos.git $HOME/theos
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
 
       - name: Download & Install iOS 16.5 SDK
         run: |
           mkdir -p $THEOS/sdks
-          curl -L -o $THEOS/sdks/iPhoneOS16.5.sdk.tar.xz https://github.com/xyzdev/ios-sdks/releases/download/v1.0/iPhoneOS16.5.sdk.tar.xz || \
-          git clone --depth 1 --filter=blob:none --sparse https://github.com/theos/sdks.git $THEOS/sdks-tmp && \
-          cd $THEOS/sdks-tmp && git sparse-checkout set iPhoneOS16.5.sdk && \
-          mv iPhoneOS16.5.sdk $THEOS/sdks/ && rm -rf $THEOS/sdks-tmp
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/theos/sdks.git $THEOS/sdks-tmp
+          cd $THEOS/sdks-tmp
+          git sparse-checkout set iPhoneOS16.5.sdk
+          mv iPhoneOS16.5.sdk $THEOS/sdks/
+          cd $HOME && rm -rf $THEOS/sdks-tmp
 
       - name: Run Build Script
         run: |
