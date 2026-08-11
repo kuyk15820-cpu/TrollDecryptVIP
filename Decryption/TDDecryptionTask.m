@@ -96,7 +96,7 @@ TDDecryptionTaskOptions TDDecryptionTaskDefaultOptions(void) {
         if (options.decryptBinaryOnly) {
             NSLog(@"Decrypting main binary only to output directory: %@", ROOT_OUTPUT_PATH);
             NSLog(@"image path: %@", imagePath);
-            NSString *fileName = [NSString stringWithFormat:@"%@_%@_decrypted",
+            NSString *fileName = [NSString stringWithFormat:@"%@_%@_F1X3R-Decrypt",
                                   [imagePath lastPathComponent],
                                   [self->_applicationProxy atl_shortVersionString]];
 
